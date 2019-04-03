@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENE'S TEST APP</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script>
+		
+
+
+        function GetFP(){
+            var fp = returnPath("fileupload");
+            NewRow("FP","Filepath DIR",fp,Timestamp(),"success");
+        }
+
+        function Timestamp(){
+            var d = new Date();
+            var n = d.toTimeString().substring(1,8);
+            return n;
+            alert(n);
+        }
+        ///////////////////////////////////////////////////////////
+        ////////// TABLE FUNCTIONS - EXPOSED TO PYTHON ///////////
+        //////////////////////////////////////////////////////////
+        eel.expose(ClearTable)
+        function ClearTable(){
+            // var table = document.getElementById('loglist')
+            location.reload();
+            var bodyRef = document.getElementById('loglist').getElementsByTagName('tbody')[0]; bodyRef.innerHTML = '';
+        }
+        eel.expose(NewRow)
+        function NewRow(d1,d2,d3,d4,type){
+            var table = document.getElementById("loglist");
+
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = table.insertRow();
+            
+            row.className = type;
+
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            // Add some text to the new cells:
+            cell1.innerHTML = d1;
+            cell2.innerHTML = d2;
+            cell3.innerHTML = d3;
+            cell4.innerHTML = d4;
+
+            // cell1.className = "success";
+            // cell2.innerHTML = "d2";
+            // cell3.innerHTML = "d3";
+            // cell4.innerHTML = "d4";
+        }
+
+        //////////////////////////////////////////////////
+        //////// USE A PYTHON FUNCTION //////////////////
+        // EX 1 uses python func getTime() //////////////
+        async function getTime() {
+            let value = await eel.getTime()();
+            alert(value);
+        }
+        // EX 2 uses py function jsprint() which will output whatever in the py print window
+        eel.expose(USEPY);
+        async function USEPY(htmlid){
+            var input1 = document.getElementById(htmlid).value;
+            eel.jsprint(input1)();
+        }
+        // EX 3 USES PYTHON'S SYS>EXIT
+        function CLOSE(){
+            eel.closeapp()()
+            window.close()
+        }
+        ////////////////////////////////////////////
+        ///////// FORWARD JS DATA TO PYTHON ////////
+        function returnInput(htmlid){
+            var n =  document.getElementById(htmlid).value;
+            return n;
+        }
+        function returnPath(htmlid){
+            var n =  document.getElementById(htmlid).files[0].path;
+            return n;
+        }
+        eel.expose(FORWARD);
+        function FORWARD(htmlid){
+            var c = returnInput(htmlid);
+            return c;
+        }
+        ////////////////////////////////////////////
+
+    </script>
+</head>
+
+
+<body>
+
+    <div id="page-inner">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>GENE'S TEST APP</h2>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        
+        
+        <!-- /. ROW  -->
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input id="sin" class="form-control">
+                    <p class="help-block">Sample Text Input Box 1</p>
+                    
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <p class="fpblock" id="fileupload">NO FILE LOADED</p>
+                        <button class="btn btn-info" id="b4" onclick='eel.tkfile()()'>LOAD FILE</button>
+                    </div>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default" id="b1" onclick='NewRow("T1","T2","T3","T4","success")'>ADD ROW</button>
+                <button class="btn btn-primary" id="b2" onclick='eel.JS_testlog()()'>TEST PYTHON LOGGING</button>
+                
+                <button class="btn btn-success" id="b3" onclick='GetFP()'>GET FP</button>
+                
+                <button class="btn btn-warning" id="b5" onclick='ClearTable()'>CLEAR</button>
+            
+                <button class="btn btn-danger" id="bclose" onclick='CLOSE()'>CLOSE</button>
+            </div>
+            
+        </div>
+        <hr>
+        <div class="row">
+            
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table" id='loglist'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id= 'lltbody'>
+                            <!-- <tr class="success">
+                                <td>-1</td>
+                                <td>Success</td>
+                                <td>EXAMPLE 1</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="info">
+                                <td>-2</td>
+                                <td>Info</td>
+                                <td>EXAMPLE 2</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="warning">
+                                <td>-3</td>
+                                <td>Warning</td>
+                                <td>EXAMPLE 3</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>-4</td>
+                                <td>Danger</td>
+                                <td>EXAMPLE 4</td>
+                                <td>00:00</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+        <hr>
+
+
+        
+        <!-- /. ROW  -->
+        
+          <div class="row">
+            <div class="col-md-12">
+                    This UI design was created by Gene Myslinsky. To contact the author please contact myslin@gmail.com.
+            </div>
+        </div>
+        <!-- /. ROW  -->
+
+    </div>
+
+</body></html>

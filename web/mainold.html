@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html Lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>DEMO GUI</title>
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="/eel.js"></script>
+		<script>
+		
+            ////////////////////////////////
+			/// JS FOR THE SELECT TABLE ///
+			function addItem(ot,ov){
+                var option = document.createElement("option");
+                option.text = ot;
+                option.value = ov;
+                var select = document.getElementById("loglist");
+                select.appendChild(option);
+            }
+
+            function removeOptions(selectbox){
+                var i;
+                for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+                {
+                    selectbox.remove(i);
+                }
+            }
+
+            function CLOSE(){
+                eel.closeapp()()
+                window.close()
+            }
+            //////////////////////////////////////////////////
+            //////// USE A PYTHON FUNCTION //////////////////
+            // EX 1 uses python func getTime() //////////////
+            async function getTime() {
+                let value = await eel.getTime()();
+                alert(value);
+            }
+            // EX 2 uses py function jsprint() which will output whatever in the py print window
+            eel.expose(USEPY);
+            async function USEPY(htmlid){
+                var input1 = document.getElementById(htmlid).value;
+                eel.jsprint(input1)();
+            }
+            ////////////////////////////////////////////
+            ///////// FORWARD JS DATA TO PYTHON ////////
+            function returnInput(htmlid){
+                var n =  document.getElementById(htmlid).value;
+                return n;
+            }
+            eel.expose(FORWARD);
+            function FORWARD(htmlid){
+                var c = returnInput(htmlid);
+                return c;
+            }
+            ////////////////////////////////////////////
+
+		</script>
+    </head>
+
+
+    <body>
+
+        <h1>GUI Script</h1>
+        <p>App Text Here</p>
+		
+    <div class = "container">
+        <button class="btnb" id="b1" onclick='USEPY("sin")'>Connect & Retrieve</button>
+        <button class="btnb" id="b2" onclick='eel.CALLBACK("sin")'>Return Input</button>
+        <button class="btnb" id="b3" onclick="getTime()">Get Time</button>
+        <button class="btnb" id="badditem" onclick="addItem()">Add Item</button>
+        <button class="btnb" id="bclear" onclick='removeOptions(document.getElementById("loglist"))'>Clear</button>
+        <button class="btnr" id="bcloseapp" onclick="CLOSE()">Exit</button>
+    </div>
+	
+    <div class = "t1">
+        <input class ="t1" id="sin"></input>
+        <select size="20" class="t1" id="loglist">
+
+            
+        </select>
+    </div>
+    </body>
+</html>
