@@ -6,6 +6,7 @@
     <!-- BOOTSTRAP STYLES-->
     <link href="bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
     <script>
 		
 
@@ -21,15 +22,19 @@
             return n;
             alert(n);
         }
+        eel.expose(wFocus)
+        function wFocus(){
+            window.focus();
+        }
         ///////////////////////////////////////////////////////////
         ////////// TABLE FUNCTIONS - EXPOSED TO PYTHON ///////////
         //////////////////////////////////////////////////////////
         eel.expose(ClearTable)
         function ClearTable(){
-            // var table = document.getElementById('loglist')
-            location.reload();
-            var bodyRef = document.getElementById('loglist').getElementsByTagName('tbody')[0]; bodyRef.innerHTML = '';
+            $("#loglist tr>td").remove();
+
         }
+
         eel.expose(NewRow)
         function NewRow(d1,d2,d3,d4,type){
             var table = document.getElementById("loglist");
@@ -57,6 +62,20 @@
             // cell4.innerHTML = "d4";
         }
 
+        /// CHANGE THE TEXT OF AN ELEMENT
+        eel.expose(JSCT);
+        function JSCT(htmlid,newtext){
+            document.getElementById(htmlid).textContent=newtext;
+        }
+        eel.expose(JSCT);
+        function JSCC(htmlid,newclass){
+            document.getElementById(htmlid).className=newtext;
+        }
+        eel.expose(JSCX);
+        function JSCX(htmlid,newtext,newclass){
+            document.getElementById(htmlid).textContent=newtext;
+            document.getElementById(htmlid).className=newclass;
+        }
         //////////////////////////////////////////////////
         //////// USE A PYTHON FUNCTION //////////////////
         // EX 1 uses python func getTime() //////////////
@@ -72,8 +91,8 @@
         }
         // EX 3 USES PYTHON'S SYS>EXIT
         function CLOSE(){
-            eel.closeapp()()
-            window.close()
+            eel.closeapp()();
+            window.close();
         }
         ////////////////////////////////////////////
         ///////// FORWARD JS DATA TO PYTHON ////////
@@ -100,7 +119,7 @@
 
     <div id="page-inner">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
                 <h2>GENE'S TEST APP</h2>
             </div>
         </div>
@@ -108,25 +127,30 @@
         
         
         <!-- /. ROW  -->
+        <row>
         <hr>
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input id="sin" class="form-control">
-                    <p class="help-block">Sample Text Input Box 1</p>
+            <div class="col-md-4">
+                <div class="col-md-4">
+                    <input id="sin" class="myforml">
+                    <p>Sample Text Input Box 1</p>
                     
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <p class="fpblock" id="fileupload">NO FILE LOADED</p>
+                <div class="col-md4">
+                    <div class="col-md-4">
+                        <label class="text-warning" id="fileupload">NO FILE LOADED</p>
+                    </div>
+                    <div class="col-md-4">
                         <button class="btn btn-info" id="b4" onclick='eel.tkfile()()'>LOAD FILE</button>
                     </div>
             </div>
+        </row>
+            <hr>
             <div class="col-md-4">
                 <button class="btn btn-default" id="b1" onclick='NewRow("T1","T2","T3","T4","success")'>ADD ROW</button>
                 <button class="btn btn-primary" id="b2" onclick='eel.JS_testlog()()'>TEST PYTHON LOGGING</button>
                 
-                <button class="btn btn-success" id="b3" onclick='GetFP()'>GET FP</button>
+                <button class="btn btn-success" id="b3" onclick='GetFP()'>test change</button>
                 
                 <button class="btn btn-warning" id="b5" onclick='ClearTable()'>CLEAR</button>
             
@@ -135,10 +159,10 @@
             
         </div>
         <hr>
-        <div class="row">
+        <div class="col-md-4">
             
-            <div class="col-md-6">
-                <div class="table-responsive">
+            <div class="col-md-4">
+                <div class="table-responsive" id=tablediv>
                     <table class="table" id='loglist'>
                         <thead>
                             <tr>
@@ -185,8 +209,8 @@
         
         <!-- /. ROW  -->
         
-          <div class="row">
-            <div class="col-md-12">
+          <div class="panel-footer">
+            <div class="panel-footer">
                     This UI design was created by Gene Myslinsky. To contact the author please contact myslin@gmail.com.
             </div>
         </div>

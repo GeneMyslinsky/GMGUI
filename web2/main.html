@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GENE'S TEST APP</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="bs.css" rel="stylesheet">
+ 
+    <script type="text/javascript" src="bs.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="bind.js"></script>
+
+</head>
+
+<body>
+<div class="container-fluid">
+                <div class="row">
+                        <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                            <div class="content">
+                                    <div class="contentz__container">
+                                      <li class="contentz__container__text">
+                                        GMGUI
+                                      </li>
+                                      
+                                      <ul class="contentz__container__list ">
+                                        <li class="contentz__container__list__item">SQL</li>
+                                        <li class="contentz__container__list__item">EXCEL 2019</li>
+                                        <li class="contentz__container__list__item">SELENIUM</li>
+                                        <li class="contentz__container__list__item">PYTHON</li>
+                                        
+                                      </ul>
+                                    </div>
+                                  </div>
+                </div>
+                <div class="col-md-3"></div>
+                </div>
+
+                
+
+                <div class="row">
+                    <div class = "col-md-4">
+
+                        <div class="rowng">
+                            <input type = "text" id="sin" class="myin1">
+                            </div>
+
+                            <div class="rowng">
+                            <p class = "stdesc" >Sample Text Box</p>
+                            </div>
+                        </div>
+
+                    <div class = col-md-4>
+
+                        <div class ="rowng">
+                                <button class="btn btn-file fwide"  id="bfile" onclick='eel.tkfile()()'>SELECT FILE</button>
+                                
+                        </div>
+
+                        <div class ="rowng">
+                                
+                                <!----  
+                                    <label class="text-warning stdesc" id="fileupload">NO FILE LOADED</label>
+                                    ---->
+                        </div>
+                    </div>
+                    
+                    <div class = col-md-4>
+                           
+                        </div>
+                </div>
+
+
+    
+
+                <div class ="row">
+                        <div class = col-md-12 style="background-color: var(--b2b)">
+                                <div class ="rowng">
+                <button class="btn rb" id="b1" onclick='NewRow("T1","T2","T3","T4","success")'>ADD ROW</button>
+                <button class="btn rb" id="b2" onclick='eel.JS_testlog()()'>TEST PYTHON LOGGING</button>               
+                <button class="btn rb" id="b3" onclick='GetFP()'>test change</button>    
+                <button class="btn rb" id="b5" onclick='ClearTable()'>CLEAR</button>
+                <button class="btn btn-danger" id="bclose" onclick='CLOSE()'>CLOSE</button>
+                                </div>
+                            </div>
+                </div>
+
+                
+
+            <div class ="row"> <!-- TABLE-->
+                <div class="col-md-12" id=tablediv>
+                    <div class = "rowng">
+                    <table class="table" id='loglist'>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Description</th>
+                                <th>Output</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id= 'lltbody'>
+                            <tr class="success">
+                                <td>-1</td>
+                                <td>Success</td>
+                                <td>EXAMPLE 1</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="info">
+                                <td>-2</td>
+                                <td>Info</td>
+                                <td>EXAMPLE 2</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="warning">
+                                <td>-3</td>
+                                <td>Warning</td>
+                                <td>EXAMPLE 3</td>
+                                <td>00:00</td>
+                            </tr>
+                            <tr class="danger">
+                                <td>-4</td>
+                                <td>Danger</td>
+                                <td>EXAMPLE 4</td>
+                                <td>00:00</td>
+                            </tr>
+
+                        </tbody>
+                        
+                    </table>
+                    </div>
+                </div>
+            </div>
+            <div class ="row">
+                    
+                        
+                            <p class = "foottext guttergone">This UI design was created by Gene Myslinsky using bootstrap4, python3.7 and eel and licensed MIT 2019; to contact the author please contact myslin@gmail.com.</p>
+             
+                        </div>
+                    
+            </div>
+            </div>
+</body></html>
